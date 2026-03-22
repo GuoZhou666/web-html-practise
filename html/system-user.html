@@ -1,264 +1,168 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>用户管理 - 外卖订单管理系统</title>
+  <link rel="icon" href="assets/img/favicon.png" />
 
-    <title>外卖订单管理系统</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+  <!-- CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-
-    <!-- Vendor CSS Files -->
-    <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"      
-    />
-    <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-    />
-    <link
-    href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-    />
-    <link
-    rel="stylesheet" href="assets/vendor/gridjs/dist/theme/mermaid.min.css"
-    />
-
-
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
-  </head>
-
-  <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-      <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="" />
-          <span class="d-none d-lg-block">外卖订单管理系统</span>
+<!-- 顶部导航 -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="" />
+      <span class="d-none d-lg-block">外卖订单管理系统</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div>
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/profile-img.jpg" class="rounded-circle" alt="" />
+          <span class="d-none d-md-block dropdown-toggle ps-2">用户名</span>
         </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div>
-      <!-- End Logo -->
-
-      <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-          <li class="nav-item dropdown pe-3">
-            <a
-              class="nav-link nav-profile d-flex align-items-center pe-0"
-              href="#"
-              data-bs-toggle="dropdown"
-            >
-              <img
-                src="assets/img/profile-img.jpg"
-                alt="Profile"
-                class="rounded-circle"
-              />
-              <span class="d-none d-md-block dropdown-toggle ps-2"
-                >用户名</span
-              > </a
-            ><!-- End Profile Iamge Icon -->
-
-            <ul
-              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
-            >
-              <li class="dropdown-header">
-                <h6>部门名称</h6>
-                <span>角色名称</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>用户设置</span>
-                </a>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <i class="bi bi-box-arrow-right"></i>
-                  <span>注销</span>
-                </a>
-              </li>
-            </ul>
-            <!-- End Profile Dropdown Items -->
-          </li>
-          <!-- End Profile Nav -->
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header"><h6>部门</h6><span>角色</span></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="users-profile.html"><i class="bi bi-gear"></i> 用户设置</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> 注销</a></li>
         </ul>
-      </nav>
-      <!-- End Icons Navigation -->
-    </header>
-    <!-- End Header -->
+      </li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="index.html">
-            <i class="bi bi-grid"></i>
-            <span>主页</span>
-          </a>
-        </li>
-        <!-- End Dashboard Nav -->
-
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            data-bs-target="#components-nav"
-            data-bs-toggle="collapse"
-            href="#"
-          >
-            <i class="bi bi-menu-button-wide"></i><span>系统管理</span
-            ><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul
-            id="components-nav"
-            class="nav-content collapse"
-            data-bs-parent="#sidebar-nav"
-          >
-            <li>
-              <a href="system-user.html">
-                <i class="bi bi-circle"></i><span>用户管理</span>
-              </a>
-            </li>
-            <li>
-              <a href="components-accordion.html">
-                <i class="bi bi-circle"></i><span>角色管理</span>
-              </a>
-            </li>
-            <li>
-              <a href="components-badges.html">
-                <i class="bi bi-circle"></i><span>部门管理</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <!-- End Components Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link" href="blank.html">
-            <i class="bi bi-file-earmark"></i>
-            <span>空白模板页</span>
-          </a>
-        </li>
-        <!-- End Blank Page Nav -->
+<!-- 侧边栏 -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item"><a class="nav-link collapsed" href="index.html"><i class="bi bi-grid"></i><span>主页</span></a></li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#components-nav"><i class="bi bi-menu-button-wide"></i><span>系统管理</span><i class="bi bi-chevron-down ms-auto"></i></a>
+      <ul id="components-nav" class="collapse nav-content" data-bs-parent="#sidebar-nav">
+        <li><a href="system-user.html" class="active"><i class="bi bi-circle"></i><span>用户管理</span></a></li>
+        <li><a href="components-accordion.html"><i class="bi bi-circle"></i><span>角色管理</span></a></li>
+        <li><a href="components-badges.html"><i class="bi bi-circle"></i><span>部门管理</span></a></li>
       </ul>
-    </aside>
-    <!-- End Sidebar-->
+    </li>
+    <li class="nav-item"><a class="nav-link" href="blank.html"><i class="bi bi-file-earmark"></i><span>空白模板</span></a></li>
+  </ul>
+</aside>
 
-    <main id="main" class="main">
-      <div class="pagetitle">
-        <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Blank</li>
-          </ol>
-        </nav>
-      </div>
-      <!-- End Page Title -->
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">用户列表</h5>
-      
-                <!-- 查询表单 -->
-                <form class="row row-cols-lg-auto g-3 align-items-center">
-                  <div class="col-12">
-                    <input type="text" class="form-control" placeholder="账号" name="account">
-                  </div>
-                  <div class="col-12">
-                    <input type="text" class="form-control" placeholder="姓名" name="realname">
-                  </div>
-                  <div class="col-12">
-                    <input type="text" class="form-control" placeholder="联系电话" name="phone">
-                  </div>
-                  <div class="col-12">
-                    <select class="form-select" name="status">
-                      <option selected>状态</option>
-                      <option value="1">启用</option>
-                      <option value="0">禁用</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
-                      <i class="bi bi-search"></i> 查询
-                    </button>
-                  </div>
-                </form><!-- End 查询表单 -->
-      
-                <!-- 用户列表表格 -->
-                <div class="table-responsive mt-4">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">用户名</th>
-                        <th scope="col">状态</th>
-                        <th scope="col">姓名</th>
-                        <th scope="col">手机</th>
-                        <th scope="col">邮箱</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- 这里可以循环渲染数据 -->
-                      <tr>
-                        <td>admin</td>
-                        <td><span class="badge bg-success">启用</span></td>
-                        <td>管理员</td>
-                        <td>13800138000</td>
-                        <td>admin@example.com</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <nav><ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">主页</a></li>
+      <li class="breadcrumb-item">系统管理</li>
+      <li class="breadcrumb-item active">用户管理</li>
+    </ol></nav>
+  </div>
+
+  <section class="section">
+    <div class="row"><div class="col-lg-12"><div class="card"><div class="card-body">
+      <h5 class="card-title">用户列表</h5>
+
+      <!-- 查询表单 -->
+      <form id="searchForm" class="row row-cols-lg-auto g-3 mb-3 align-items-center">
+        <div class="col-12"><input type="text" class="form-control" name="username" placeholder="账号"></div>
+        <div class="col-12"><input type="text" class="form-control" name="name" placeholder="姓名"></div>
+        <div class="col-12"><input type="text" class="form-control" name="phone" placeholder="电话"></div>
+        <div class="col-12">
+          <select class="form-select" name="enableState">
+            <option value="">状态</option>
+            <option value="启用">启用</option>
+            <option value="停用">停用</option>
+          </select>
         </div>
-      </section>
-    </main>
-    <!-- End #main -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> 查询</button>
+          <button type="reset" class="btn btn-secondary"><i class="bi bi-arrow-repeat"></i> 重置</button>
+          <button class="btn btn-success"><i class="bi bi-plus"></i> 添加</button>
+        </div>
+      </form>
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-      <div class="copyright">
-        &copy; Copyright <strong><span>外卖订单管理系统</span></strong
-        >. All Rights Reserved
-      </div>
-      <div class="credits">Designed by ZG 2023040301071</div>
-    </footer>
-    <!-- End Footer -->
+      <!-- 表格容器 -->
+      <div id="dataTable"></div>
+    </div></div></div></div>
+  </section>
+</main>
 
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+<footer id="footer" class="footer">
+  <div class="copyright">&copy; 外卖订单管理系统</div>
+  <div class="credits">Designed by ZG</div>
+</footer>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/moment/moment.js"></script>
-    <script src="assets/vendor/gridjs/dist/gridjs.umd.js"></script>
-    <script src="assets/vendor/gridjs/I10n/dist/l10n.umd.js"></script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+<!-- JS 核心：只保留正确路径 -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/moment/moment.js"></script>
+<script src="assets/vendor/gridjs/dist/gridjs.umd.js"></script>
+<script src="assets/js/main.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-    <script>
+<script>
+// ==============================================
+// ✅ 关键：使用 真实后端接口 + 数据库查询
+// ==============================================
+const apiBaseUrl = "/api/rest/user";
 
+const columns = [
+  { id: "id", hidden: true },
+  { id: "username", name: "用户名" },
+  { id: "enableState", name: "状态" },
+  { id: "name", name: "姓名" },
+  { id: "phone", name: "手机" },
+  { id: "email", name: "邮箱" },
+  { id: "updateAt", name: "更新时间" },
+  { name: "操作", width: "28%" }
+];
 
-    </script>
-  </body>
+// 表格配置（对接数据库）
+const grid = new gridjs.Grid({
+  columns: columns,
+  pagination: { limit: 10 },
+  sort: true,
+  server: {
+    url: apiBaseUrl,
+    then: (data) => data.content.map(item => [
+      item.id,
+      item.username,
+      item.enableState === "启用"
+        ? gridjs.html('<span class="badge bg-success">启用</span>')
+        : gridjs.html('<span class="badge bg-danger">停用</span>'),
+      item.name,
+      item.phone,
+      item.email,
+      moment(item.updateAt || new Date()).format("YYYY-MM-DD HH:mm"),
+      gridjs.html(`
+        <button class="btn btn-sm btn-primary me-1">编辑</button>
+        <button class="btn btn-sm btn-warning me-1">重置密码</button>
+        <button class="btn btn-sm ${item.enableState=="启用"?"btn-danger":"btn-success"}">
+          ${item.enableState=="启用"?"禁用":"启用"}
+        </button>
+      `)
+    ]),
+    total: (data) => data.totalElements
+  }
+}).render(document.getElementById("dataTable"));
+
+// 搜索功能
+document.getElementById("searchForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const params = new URLSearchParams(new FormData(this));
+  grid.updateConfig({
+    server: { url: `${apiBaseUrl}?${params}` }
+  }).forceRender();
+});
+</script>
+</body>
 </html>
