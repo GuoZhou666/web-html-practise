@@ -103,16 +103,12 @@
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<!-- JS 核心：只保留正确路径 -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/moment/moment.js"></script>
 <script src="assets/vendor/gridjs/dist/gridjs.umd.js"></script>
 <script src="assets/js/main.js"></script>
 
 <script>
-// ==============================================
-// ✅ 关键：使用 真实后端接口 + 数据库查询
-// ==============================================
 const apiBaseUrl = "/api/rest/user";
 
 const columns = [
@@ -126,7 +122,7 @@ const columns = [
   { name: "操作", width: "28%" }
 ];
 
-// 表格配置（对接数据库）
+// 表格配置
 const grid = new gridjs.Grid({
   columns: columns,
   pagination: { limit: 10 },
