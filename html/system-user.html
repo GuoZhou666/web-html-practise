@@ -152,13 +152,50 @@ const grid = new gridjs.Grid({
 }).render(document.getElementById("dataTable"));
 
 // 搜索功能
-document.getElementById("searchForm").addEventListener("submit", function (e) {
+document.getElementById("searchForm").addEventListener("submit", async function (e) {
   e.preventDefault();
   const params = new URLSearchParams(new FormData(this));
-  grid.updateConfig({
-    server: { url: `${apiBaseUrl}?${params}` }
-  }).forceRender();
+  const url = `${apiBaseUrl}?${params}`;
+
+  try {
+    const res = await fetch(url, { method: "GET" });
+    if (res.status === 403) {
+      showPermissionModal();
+      return;
+    }
+    if (!res.ok) throw new Error("Network error");
+
+    grid.updateConfig({ server: { url } }).forceRender();
+  } catch (err) {
+    console.error(err);
+  }
 });
+
+function showPermissionModal() {
+  let modalEl = document.getElementById("permissionModal");
+  if (!modalEl) {
+    modalEl = document.createElement("div");
+    modalEl.id = "permissionModal";
+    modalEl.className = "modal fade";
+    modalEl.innerHTML = `
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">权限不足</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">权限不足，请联系管理员</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modalEl);
+  }
+  const modal = new bootstrap.Modal(modalEl);
+  modal.show();
+}
 </script>
 </body>
 </html>
