@@ -151,6 +151,8 @@ const grid = new gridjs.Grid({
   }
 }).render(document.getElementById("dataTable"));
 
+// 当用户使用这个功能的时候，如果是管理员模式可以返回查询的值，如果是普通用户模式则返回403
+// 自动弹出“权限不足”的提示框，不让页面一直处于Loading状态，后台卡死
 // 搜索功能
 document.getElementById("searchForm").addEventListener("submit", async function (e) {
   e.preventDefault();
