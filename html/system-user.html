@@ -101,6 +101,65 @@
   <div class="credits">Designed by ZG</div>
 </footer>
 
+    <!-- 操作成功消息提醒 -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div
+        id="successToastEl"
+        class="toast hide bg-success text-white"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        >
+    <div class="toast-body" id="successToastMessage">successMessage</div>
+    </div>
+</div>
+
+    <!-- 重置密码模态框 -->
+    <div class="modal fade" id="resetPwdModalEl" tabindex="-1">
+    <form id="resetPwdForm" class="needs-validation" novalidate>
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title">重置密码</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" arialabel="Close"></button>
+    </div>
+    <div class="modal-body">
+    <div class="row mb-3" id="resetPwdAlert"></div>
+    <div class="row mb-3">
+    <label for="inputPassword" class="col-sm-4 col-form-label">请输入新密码： </label>
+     <div class="col-sm-8">
+        <input type="password" class="form-control" id="inputPassword"  name="password" required />
+        </div>
+    </div>
+      <div class="row mb-3">
+      <label for="inputPasswordRepeat" class="col-sm-4 col-form-label">再次输入密码 </label>
+    <div class="col-sm-8">
+    <input type="password" class="form-control" id="inputPasswordRepeat" name="passwordRepeat" required />
+          </div>
+        </div>
+        <!-- 启用 | 停用用户的消息确认框 -->
+        <div class="toast-container position-fixed top-50 start-50">
+            <div id="toggleUserToastEl" class="toast hide" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="toast-body">
+        <span id="toggleUserToastMessage"></span>
+              <div class="row mt-1" id="toggleUserAlert"></div>
+              <div class="mt-2 pt-2 border-top">
+            <button id="confirmToggleUserBtn" type="button" class="btn btn-primary btnsm">确认</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bsdismiss="toast">取消</button>
+                </div>
+             </div>
+           </div>
+        </div>
+      </div>
+     <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">提交</button>
+        </div>
+       </div>
+     </div>
+    </form>
+</div>
+
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -109,8 +168,9 @@
 <script src="assets/js/main.js"></script>
 
 <script>
-const apiBaseUrl = "/api/rest/user";
+const url = "/api/rest/user"; // 接口地址
 
+// 表格列配置
 const columns = [
   { id: "id", hidden: true },
   { id: "username", name: "用户名" },
@@ -119,60 +179,233 @@ const columns = [
   { id: "phone", name: "手机" },
   { id: "email", name: "邮箱" },
   { id: "updateAt", name: "更新时间" },
-  { name: "操作", width: "28%" }
+  { name: "操作", width: "25%", formatter: (_, row) =>
+      gridjs.html(`
+      <button type="button" class="btn btn-sm btn-warning reset-pwd-btn">
+      <i class="bi bi-lock"></i> 重置密码
+      </button>`), }, 
 ];
 
-// 表格配置
-const grid = new gridjs.Grid({
-  columns: columns,
-  pagination: { limit: 10 },
-  sort: true,
+// 服务端配置
+const server = {
+  url: url,
+  // 数据格式化 + 状态样式 + 操作按钮
+  then: (data) => data.content.map((item) => [
+    item.id,
+    item.username,
+    item.enableState === "启用"
+      ? gridjs.html('<span class="badge bg-success">启用</span>')
+      : gridjs.html('<span class="badge bg-danger">停用</span>'),
+    item.name,
+    item.phone,
+    item.email,
+    // 时间格式化
+    item.updateAt ? moment(item.updateAt).format("YYYY-MM-DD HH:mm:ss") : "",
+    // 操作按钮
+    gridjs.html(`
+      <button class="btn btn-sm btn-primary me-1">编辑</button>
+      <button class="btn btn-sm btn-warning me-1">重置密码</button>
+      <button class="btn btn-sm ${item.enableState == "启用" ? "btn-danger" : "btn-success"}">
+        ${item.enableState == "启用" ? "禁用" : "启用"}
+      </button>
+    `)
+  ]),
+  // 总条数
+  total: (data) => data.totalElements
+};
+
+// 分页配置
+const pagination = {
+  limit: 10,
   server: {
-    url: apiBaseUrl,
-    then: (data) => data.content.map(item => [
-      item.id,
-      item.username,
-      item.enableState === "启用"
-        ? gridjs.html('<span class="badge bg-success">启用</span>')
-        : gridjs.html('<span class="badge bg-danger">停用</span>'),
-      item.name,
-      item.phone,
-      item.email,
-      moment(item.updateAt || new Date()).format("YYYY-MM-DD HH:mm"),
-      gridjs.html(`
-        <button class="btn btn-sm btn-primary me-1">编辑</button>
-        <button class="btn btn-sm btn-warning me-1">重置密码</button>
-        <button class="btn btn-sm ${item.enableState=="启用"?"btn-danger":"btn-success"}">
-          ${item.enableState=="启用"?"禁用":"启用"}
-        </button>
-      `)
-    ]),
-    total: (data) => data.totalElements
+    url: (prev, page, limit) => addQueryParam(prev, `size=${limit}&page=${page}`)
   }
-}).render(document.getElementById("dataTable"));
+};
 
-// 当用户使用这个功能的时候，如果是管理员模式可以返回查询的值，如果是普通用户模式则返回403
-// 自动弹出“权限不足”的提示框，不让页面一直处于Loading状态，后台卡死
-// 搜索功能
-document.getElementById("searchForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const params = new URLSearchParams(new FormData(this));
-  const url = `${apiBaseUrl}?${params}`;
+// 配置项
+const options = {
+  columns,
+  pagination,
+  server,
+  language: gridjs.l10n.cnCN, // 中文
+  sort: true
+};
 
-  try {
-    const res = await fetch(url, { method: "GET" });
-    if (res.status === 403) {
-      showPermissionModal();
-      return;
+
+// 页面加载初始化
+window.onload = function () {
+  const grid = new gridjs.Grid(options);
+  grid.render(document.getElementById("dataTable"));
+
+  // 搜索功能
+  const searchForm = document.getElementById("searchForm");
+  searchForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    try {
+      // 收集搜索条件
+      const formData = new FormData();
+      formData.set("username", searchForm.username.value.trim());
+      formData.set("name", searchForm.name.value.trim());
+      formData.set("phone", searchForm.phone.value.trim());
+      formData.set("enableState", searchForm.enableState.value.trim());
+      const searchParams = new URLSearchParams(formData);
+
+      // 拼接最终URL
+      const newUrl = addQueryParam(url, searchParams.toString());
+
+      // 权限判断：403 拦截
+      const testRes = await fetch(newUrl, { method: "GET" });
+      if (testRes.status === 403) {
+        showPermissionModal(); // 弹出权限不足
+        return;
+      }
+      const successToastEl = document.getElementById("successToastEl"); // DOM
+      const successToast = new bootstrap.Toast(successToastEl, {
+      autohide: true,
+      delay: 2000,
+      });
+
+    // 获取重置密码弹窗的DOM元素
+    const resetPwdModalEl = document.getElementById("resetPwdModalEl"); // DOM 对象
+    // 初始化Bootstrap模态框实例，禁用键盘关闭功能
+    const resetPwdModal = new bootstrap.Modal(resetPwdModalEl, {
+    keyboard: false,
+    }); // Bootstrap Modal 对象
+    // 监听重置密码弹窗隐藏完成的事件（hidden.bs.modal是Bootstrap模态框的隐藏完成事件）
+    resetPwdModalEl.addEventListener("hidden.bs.modal", (event) => {
+    // 重置表单数据到初始状态
+    resetPwdForm.reset();
+    // 移除表单的验证样式类（was-validated是Bootstrap表单验证的样式类）
+    resetPwdForm.classList.remove("was-validated");
+    // 清空弹窗中的提示信息内容
+    resetPwdAlert.innerHTML = "";
+    });
+
+    // 初始化用户ID变量，用于存储当前选中要重置密码的用户ID
+    let userId = null;
+    // 监听表格的单元格点击事件（grid应为表格组件实例）
+    grid.on("cellClick", (...args) => {
+    // 解构事件参数：第一个参数是原生点击事件对象
+    const event = args[0];
+    // 从表格点击参数中获取当前行第一个单元格的用户ID数据并赋值
+    userId = args[3].cells[0].data;
+    // 判断点击的元素是否是"重置密码"按钮（通过CSS类名识别）
+    if (event.target.classList.contains("reset-pwd-btn")) {
+    // 如果是重置密码按钮，显示重置密码的模态框
+    resetPwdModal.show();
+    return;
     }
-    if (!res.ok) throw new Error("Network error");
+    // 判断当前触发事件的元素是否包含"toggle-user-btn"类名（即是否点击了用户启用/停用按钮）
+    if (event.target.classList.contains("toggle-user-btn")) {
+    // 根据表格单元格中的状态，动态拼接确认提示语
+    // args[3].cells[2].data 表示表格行中第3列的状态值（"启用"或"停用"）
+    // args[3].cells[1].data 表示表格行中第2列的用户名
+    const message =
+    args[3].cells[2].data === "启用"
+    ? `请确认要"停用"用户${args[3].cells[1].data}` // 状态为启用时，提示停用
+    : `请确认要"启用"用户${args[3].cells[1].data}`; // 状态为停用时，提示启用
+    // 将拼接好的提示语赋值给Toast提示框的文本元素
+    toggleUserToastMessage.innerText = message;
+    // 显示Toast提示框（确认弹窗）
+    toggleUserToast.show();
+    // 终止后续代码执行（避免触发其他逻辑）
+    return;
+    }
+    });
 
-    grid.updateConfig({ server: { url } }).forceRender();
-  } catch (err) {
-    console.error(err);
-  }
-});
+    // 监听重置密码表单的提交事件
+    resetPwdForm.addEventListener("submit", (event) => {
+    // 阻止表单默认的提交行为（避免页面刷新）
+    event.preventDefault();
+    // 检查表单是否通过Bootstrap的内置验证规则
+    if (resetPwdForm.checkValidity()) {
+    // 创建FormData对象，用于收集表单数据
+    const formData = new FormData();
+    // 收集密码输入框的值（去除首尾空格）并添加到FormData
+    formData.set("password", resetPwdForm.password.value.trim());
+    // 收集确认密码输入框的值（去除首尾空格）并添加到FormData
+    formData.set("passwordRepeat", resetPwdForm.passwordRepeat.value.trim());
+    // 将FormData转换为普通对象后再序列化为JSON字符串，适配接口参数格式
+    const jsonStr = JSON.stringify(Object.fromEntries(formData));
+    // 发送PATCH请求到重置密码接口，携带用户ID和新密码信息
+    fetch(`/api/rest/user/${userId}/update-password`, {
+    method: "PATCH", // 使用PATCH方法更新资源（符合RESTful规范）
+    headers: { "Content-Type": "application/json" }, // 指定请求体为JSON格式
+    body: jsonStr, // 提交JSON格式的密码数据
+    }).then((resp) => {
+    // 判断接口响应是否成功（HTTP状态码200-299）
+    if (resp.ok) {
+    // 密码重置成功：关闭弹窗
+    resetPwdModal.hide();
+    // 设置成功提示文本并显示提示框
+    successToastMessage.innerText = "重置密码成功";
+    successToast.show();
+    // 刷新表格数据（重新渲染表格，确保数据最新）
+    grid.updateConfig(options).forceRender();
+    } else {// 接口响应失败：解析错误信息并展示
+    resp.json().then((err) => {
+    // 创建错误提示框，显示接口返回的错误信息（danger为Bootstrap危险样式）
+    createAlert(resetPwdAlert, err.message, "danger");
+    });
+    }
+    });
+    } else {
+    // 表单验证不通过：添加was-validated类，触发Bootstrap的表单验证样式提示
+    resetPwdForm.classList.add("was-validated");
+    }
+    });
+    
+    // toggleUserToastEl 是这个DOM元素的引用变量名
+    const toggleUserToastEl = document.getElementById("toggleUserToastEl");
+    // 基于获取到的DOM元素初始化Bootstrap的Toast组件
+    // 参数1：要初始化的toast DOM元素
+    // 参数2：配置项对象 - autohide: false 表示Toast不会自动隐藏，需要手动关闭
+    const toggleUserToast = new bootstrap.Toast(toggleUserToastEl, {
+    autohide: false,
+    });
 
+    // 获取页面中“确认切换用户状态”的按钮DOM元素
+    const confirmToggleUserBtn = document.getElementById("confirmToggleUserBtn");
+    // 为确认按钮绑定点击事件监听器confirmToggleUserBtn.addEventListener("click", (event) => {
+    // 发送PATCH请求到后端接口，切换指定用户的启用/停用状态
+    // 接口地址： /api/rest/user/${userId}/toggle （userId为目标用户的ID）
+    // 请求方法： PATCH（符合RESTful规范，用于资源的部分更新）
+    fetch(`/api/rest/user/${userId}/toggle`, {
+    method: "PATCH",
+    }).then((resp) => {
+    // 判断响应状态是否成功（HTTP状态码200-299）
+    if (resp.ok) {
+    // 1. 隐藏用户状态切换的确认弹窗
+    toggleUserToast.hide();
+    // 2. 设置成功提示语并显示成功弹窗
+    successToastMessage.innerText = "切换用户状态成功";
+    successToast.show();
+    // 3. 更新表格配置并强制重新渲染，刷新用户状态显示
+    grid.updateConfig(options).forceRender();
+    } else {
+    // 请求失败（如权限不足、用户不存在、服务器错误等）
+    // 解析后端返回的JSON格式错误信息
+    resp.json().then((err) => {
+    // 在确认弹窗区域创建错误提示框
+    // 参数说明： toggleUserAlert-提示容器， err.message-错误信息， "danger"-
+    // Bootstrap危险样式（红色）
+    createAlert(toggleUserAlert, err.message, "danger");
+    });
+    }
+    });
+    
+
+    // 更新表格
+    options.server.url = newUrl;
+    grid.updateConfig(options).forceRender();
+    } catch (err) {
+      console.error("请求异常", err);
+    }
+  });
+};
+
+// 权限不足弹窗
 function showPermissionModal() {
   let modalEl = document.getElementById("permissionModal");
   if (!modalEl) {
@@ -184,7 +417,7 @@ function showPermissionModal() {
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">权限不足</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">权限不足，请联系管理员</div>
           <div class="modal-footer">
@@ -195,8 +428,7 @@ function showPermissionModal() {
     `;
     document.body.appendChild(modalEl);
   }
-  const modal = new bootstrap.Modal(modalEl);
-  modal.show();
+  new bootstrap.Modal(modalEl).show();
 }
 </script>
 </body>
