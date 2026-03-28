@@ -1,388 +1,799 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>用户管理 - 外卖订单管理系统</title>
-  <link rel="icon" href="assets/img/favicon.png" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户管理 - 外卖订单管理系统</title>
+    <link rel="icon" href="assets/img/favicon.png" />
 
-  <!-- CSS -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-  <link href="assets/vendor/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-</head>
-<body>
-
-<!-- 顶部导航 -->
-<header id="header" class="header fixed-top d-flex align-items-center">
-  <div class="d-flex align-items-center justify-content-between">
-    <a href="index.html" class="logo d-flex align-items-center">
-      <img src="assets/img/logo.png" alt="" />
-      <span class="d-none d-lg-block">外卖订单管理系统</span>
-    </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div>
-  <nav class="header-nav ms-auto">
-    <ul class="d-flex align-items-center">
-      <li class="nav-item dropdown pe-3">
-        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="assets/img/profile-img.jpg" class="rounded-circle" alt="" />
-          <span class="d-none d-md-block dropdown-toggle ps-2">用户名</span>
+    <!-- CSS -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- 顶部导航 -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="" />
+          <span class="d-none d-lg-block">外卖订单管理系统</span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <li class="dropdown-header"><h6>部门</h6><span>角色</span></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="users-profile.html"><i class="bi bi-gear"></i> 用户设置</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> 注销</a></li>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="assets/img/profile-img.jpg"
+                class="rounded-circle"
+                alt=""
+              />
+              <span class="d-none d-md-block dropdown-toggle ps-2">用户名</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6>部门</h6>
+                <span>角色</span>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="users-profile.html"
+                  ><i class="bi bi-gear"></i> 用户设置</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-box-arrow-right"></i> 注销</a
+                >
+              </li>
+            </ul>
+          </li>
         </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+      </nav>
+    </header>
 
-<!-- 侧边栏 -->
-<aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-item"><a class="nav-link collapsed" href="index.html"><i class="bi bi-grid"></i><span>主页</span></a></li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#components-nav"><i class="bi bi-menu-button-wide"></i><span>系统管理</span><i class="bi bi-chevron-down ms-auto"></i></a>
-      <ul id="components-nav" class="collapse nav-content" data-bs-parent="#sidebar-nav">
-        <li><a href="system-user.html" class="active"><i class="bi bi-circle"></i><span>用户管理</span></a></li>
-        <li><a href="components-accordion.html"><i class="bi bi-circle"></i><span>角色管理</span></a></li>
-        <li><a href="components-badges.html"><i class="bi bi-circle"></i><span>部门管理</span></a></li>
+    <!-- 侧边栏 -->
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="index.html"
+            ><i class="bi bi-grid"></i><span>主页</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#components-nav"
+            ><i class="bi bi-menu-button-wide"></i><span>系统管理</span
+            ><i class="bi bi-chevron-down ms-auto"></i
+          ></a>
+          <ul
+            id="components-nav"
+            class="collapse nav-content"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="system-user.html" class="active"
+                ><i class="bi bi-circle"></i><span>用户管理</span></a
+              >
+            </li>
+            <li>
+              <a href="components-accordion.html"
+                ><i class="bi bi-circle"></i><span>角色管理</span></a
+              >
+            </li>
+            <li>
+              <a href="components-badges.html"
+                ><i class="bi bi-circle"></i><span>部门管理</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blank.html"
+            ><i class="bi bi-file-earmark"></i><span>空白模板</span></a
+          >
+        </li>
       </ul>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="blank.html"><i class="bi bi-file-earmark"></i><span>空白模板</span></a></li>
-  </ul>
-</aside>
+    </aside>
 
-<main id="main" class="main">
-  <div class="pagetitle">
-    <nav><ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">主页</a></li>
-      <li class="breadcrumb-item">系统管理</li>
-      <li class="breadcrumb-item active">用户管理</li>
-    </ol></nav>
-  </div>
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">主页</a></li>
+            <li class="breadcrumb-item">系统管理</li>
+            <li class="breadcrumb-item active">用户管理</li>
+          </ol>
+        </nav>
+      </div>
 
-  <section class="section">
-    <div class="row"><div class="col-lg-12"><div class="card"><div class="card-body">
-      <h5 class="card-title">用户列表</h5>
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">用户列表</h5>
 
-      <!-- 查询表单 -->
-      <form id="searchForm" class="row row-cols-lg-auto g-3 mb-3 align-items-center">
-        <div class="col-12"><input type="text" class="form-control" name="username" placeholder="账号"></div>
-        <div class="col-12"><input type="text" class="form-control" name="name" placeholder="姓名"></div>
-        <div class="col-12"><input type="text" class="form-control" name="phone" placeholder="电话"></div>
-        <div class="col-12">
-          <select class="form-select" name="enableState">
-            <option value="">状态</option>
-            <option value="启用">启用</option>
-            <option value="停用">停用</option>
-          </select>
+                <!-- 查询表单 -->
+                <form
+                  id="searchForm"
+                  class="row row-cols-lg-auto g-3 mb-3 align-items-center"
+                >
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      placeholder="账号"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="姓名"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phone"
+                      placeholder="电话"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <select class="form-select" name="enableState">
+                      <option value="">状态</option>
+                      <option value="启用">启用</option>
+                      <option value="停用">停用</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-search"></i> 查询
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                      <i class="bi bi-arrow-repeat"></i> 重置
+                    </button>
+                    <button class="btn btn-success" id="createUserBtn">
+                      <i class="bi bi-plus"></i> 添加
+                    </button>
+                  </div>
+                </form>
+
+                <!-- 表格容器 -->
+                <div id="dataTable"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> 查询</button>
-          <button type="reset" class="btn btn-secondary"><i class="bi bi-arrow-repeat"></i> 重置</button>
-          <button class="btn btn-success"><i class="bi bi-plus"></i> 添加</button>
-        </div>
-      </form>
+      </section>
+    </main>
 
-      <!-- 表格容器 -->
-      <div id="dataTable"></div>
-    </div></div></div></div>
-  </section>
-</main>
-
-<footer id="footer" class="footer">
-  <div class="copyright">&copy; 外卖订单管理系统</div>
-  <div class="credits">Designed by ZG</div>
-</footer>
+    <footer id="footer" class="footer">
+      <div class="copyright">&copy; 外卖订单管理系统</div>
+      <div class="credits">Designed by ZG</div>
+    </footer>
 
     <!-- 操作成功消息提醒 -->
     <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div
+      <div
         id="successToastEl"
         class="toast hide bg-success text-white"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        >
-    <div class="toast-body" id="successToastMessage">successMessage</div>
+      >
+        <div class="toast-body" id="successToastMessage">successMessage</div>
+      </div>
     </div>
-</div>
 
     <!-- 重置密码模态框 -->
     <div class="modal fade" id="resetPwdModalEl" tabindex="-1">
-    <form id="resetPwdForm" class="needs-validation" novalidate>
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title">重置密码</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" arialabel="Close"></button>
-    </div>
-    <div class="modal-body">
-    <div class="row mb-3" id="resetPwdAlert"></div>
-    <div class="row mb-3">
-    <label for="inputPassword" class="col-sm-4 col-form-label">请输入新密码： </label>
-     <div class="col-sm-8">
-        <input type="password" class="form-control" id="inputPassword"  name="password" required />
+      <form id="resetPwdForm" class="needs-validation" novalidate>
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">重置密码</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                arialabel="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row mb-3" id="resetPwdAlert"></div>
+              <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label"
+                  >请输入新密码：
+                </label>
+                <div class="col-sm-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="inputPassword"
+                    name="password"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputPasswordRepeat" class="col-sm-4 col-form-label"
+                  >再次输入密码
+                </label>
+                <div class="col-sm-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="inputPasswordRepeat"
+                    name="passwordRepeat"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                关闭</button
+              ><button type="submit" class="btn btn-primary">提交</button>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
-      <div class="row mb-3">
-      <label for="inputPasswordRepeat" class="col-sm-4 col-form-label">再次输入密码 </label>
-    <div class="col-sm-8">
-    <input type="password" class="form-control" id="inputPasswordRepeat" name="passwordRepeat" required />
+
+    <!-- 编辑用户模态框 -->
+    <div class="modal fade" id="editUserModalEl" tabindex="-1">
+      <form id="editUserForm" class="needs-validation" novalidate>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">编辑用户</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                arialabel="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row mb-3" id="editUserAlert"></div>
+              <div class="row mb-3">
+                <label
+                  for="usernameInput"
+                  class="col-sm-2 col-form-label text-end"
+                  >账号/用户名
+                </label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="usernameInput"
+                    name="username"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="nameInput" class="col-sm-2 col-form-label text-end"
+                  >姓名
+                </label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nameInput"
+                    name="name"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="phoneInput" class="col-sm-2 col-form-label text-end"
+                  >手机号
+                </label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phoneInput"
+                    name="phone"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="emailInput" class="col-sm-2 col-form-label text-end"
+                  >邮箱
+                </label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emailInput"
+                    name="email"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label
+                  for="departmentInput"
+                  class="col-sm-2 col-form-label text-end"
+                  >部门
+                </label>
+                <div class="col-sm-10">
+                  <select
+                    class="form-select"
+                    id="departmentInput"
+                    name="deptId"
+                    required
+                  ></select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="roleSelect" class="col-sm-2 col-form-label text-end"
+                  >角色
+                </label>
+                <div class="col-sm-10">
+                  <select
+                    class="form-select"
+                    id="roleSelect"
+                    name="roleId"
+                    required
+                  ></select>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3 d-none" id="passwordEdit">
+              <label class="col-sm-2 col-form-label text-end">密码 </label>
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passwordInput"
+                  name="password"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                关闭
+              </button>
+              <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- 启用 | 停用用户的消息确认框 -->
+    <div class="toast-container position-fixed top-50 start-50">
+      <div
+        id="toggleUserToastEl"
+        class="toast hide"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-body">
+          <span id="toggleUserToastMessage"></span>
+          <div class="row mt-1" id="toggleUserAlert"></div>
+          <div class="mt-2 pt-2 border-top">
+            <button
+              id="confirmToggleUserBtn"
+              type="button"
+              class="btn btn-primary btnsm"
+            >
+              确认
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary btnsm"
+              data-bs-dismiss="toast"
+            >
+              取消
+            </button>
           </div>
         </div>
       </div>
-     <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">提交</button>
-        </div>
-       </div>
-     </div>
-    </form>
-    
-</div>
-
-  <!-- 启用 | 停用用户的消息确认框 -->
-  <div class="toast-container position-fixed top-50 start-50">
-   <div id="toggleUserToastEl" class="toast hide" role="alert" aria-live="assertive"
-     aria-atomic="true">
-      <div class="toast-body">
-      <span id="toggleUserToastMessage"></span>
-        <div class="row mt-1" id="toggleUserAlert"></div>
-          <div class="mt-2 pt-2 border-top">
-              <button id="confirmToggleUserBtn" type="button" class="btn btn-primary btnsm">确认</button>
-              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">取消</button>
-             </div>
-          </div>
-       </div>
     </div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/moment/moment.js"></script>
-<script src="assets/vendor/gridjs/dist/gridjs.umd.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/vendor/gridjs/I10n/dist/l10n.umd.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/moment/moment.js"></script>
+    <script src="assets/vendor/gridjs/dist/gridjs.umd.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/vendor/gridjs/I10n/dist/l10n.umd.js"></script>
 
-<script>
-  // ========== 工具函数 ==========
-  function addQueryParam(url, paramStr) {
-    if (!paramStr) return url;
-    const separator = url.includes("?") ? "&" : "?";
-    return url + separator + paramStr;
-  }
-  
-  function createAlert(container, message, type = "danger") {
-    container.innerHTML = `
+    <script>
+      // ========== 工具函数 ==========
+      function addQueryParam(url, paramStr) {
+        if (!paramStr) return url;
+        const separator = url.includes("?") ? "&" : "?";
+        return url + separator + paramStr;
+      }
+
+      function createAlert(container, message, type = "danger") {
+        container.innerHTML = `
       <div class="alert alert-${type} alert-dismissible fade show" role="alert">
         ${message}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     `;
-  }
-  
-  const url = "/api/rest/user";
-  
-  // ========== 表格配置 ==========
-  const columns = [
-    { id: "id", hidden: true },
-    { id: "username", name: "用户名" },
-    { id: "enableState", name: "状态" },
-    { id: "name", name: "姓名" },
-    { id: "phone", name: "手机" },
-    { id: "email", name: "邮箱" },
-    { id: "updateAt", name: "更新时间" },
-    { name: "操作", width: "25%" }
-  ];
-  
-  const server = {
-    url: url,
-    then: (data) => data.content.map((item) => [
-      item.id,
-      item.username,
-      item.enableState === "启用"
-        ? gridjs.html('<span class="badge bg-success">启用</span>')
-        : gridjs.html('<span class="badge bg-danger">停用</span>'),
-      item.name,
-      item.phone,
-      item.email,
-      item.updateAt ? moment(item.updateAt).format("YYYY-MM-DD HH:mm:ss") : "",
-      gridjs.html(`
-      <button class="btn btn-sm btn-primary me-1">编辑</button>
+      }
+
+      const url = "/api/rest/user";
+
+      // ========== 表格配置 ==========
+      const columns = [
+        { id: "id", hidden: true },
+        { id: "username", name: "用户名" },
+        { id: "enableState", name: "状态" },
+        { id: "name", name: "姓名" },
+        { id: "phone", name: "手机" },
+        { id: "email", name: "邮箱" },
+        { id: "updateAt", name: "更新时间" },
+        { name: "操作", width: "25%" },
+      ];
+
+      let users = [];
+      const server = {
+        url: url,
+        then: (data) => {
+          users = data.content;
+          return data.content.map((item) => [
+            item.id,
+            item.username,
+            item.enableState === "启用"
+              ? gridjs.html('<span class="badge bg-success">启用</span>')
+              : gridjs.html('<span class="badge bg-danger">停用</span>'),
+            item.name,
+            item.phone,
+            item.email,
+            item.updateAt
+              ? moment(item.updateAt).format("YYYY-MM-DD HH:mm:ss")
+              : "",
+            gridjs.html(`
+      <button class="btn btn-sm btn-primary me-1 edit-btn">编辑</button>
       <button class="btn btn-sm btn-warning me-1 reset-pwd-btn">重置密码</button>
-      <button class="btn btn-sm ${item.enableState=="启用" ? "btn-danger" : "btn-success"} toggle-user-btn">
-        ${item.enableState=="启用" ? "禁用" : "启用"}
+      <button class="btn btn-sm ${item.enableState == "启用" ? "btn-danger" : "btn-success"} toggle-user-btn">
+        ${item.enableState == "启用" ? "停用" : "启用"}
       </button>
-    `)
-    ]),
-    total: (data) => data.totalElements
-  };
-  
-  const pagination = {
-    limit: 10,
-    server: {
-      url: (prev, page, limit) => addQueryParam(prev, `size=${limit}&page=${page}`)
-    }
-  };
-  
-  const options = {
-    columns,
-    pagination,
-    server,
-    language: gridjs.l10n.cnCN ,
-    sort: true
-  };
-  
-  // ========== 页面加载 ==========
-  window.onload = function () {
-    // 安全判断：等 Bootstrap 完全加载
-    if (typeof bootstrap === 'undefined') {
-      setTimeout(() => { window.onload() }, 100);
-      return;
-    }
-  
-    // 初始化组件
-    const successToastEl = document.getElementById("successToastEl");
-    const successToast = new bootstrap.Toast(successToastEl, { delay: 2000 });
-    const successToastMessage = document.getElementById("successToastMessage");
-  
-    const resetPwdModalEl = document.getElementById("resetPwdModalEl");
-    const resetPwdModal = new bootstrap.Modal(resetPwdModalEl, { keyboard: false });
-    const resetPwdForm = document.getElementById("resetPwdForm");
-    const resetPwdAlert = document.getElementById("resetPwdAlert");
-  
-    const toggleUserToastEl = document.getElementById("toggleUserToastEl");
-    const toggleUserToast = new bootstrap.Toast(toggleUserToastEl, { autohide: false });
-    const toggleUserToastMessage = document.getElementById("toggleUserToastMessage");
-    const toggleUserAlert = document.getElementById("toggleUserAlert");
-    const confirmToggleUserBtn = document.getElementById("confirmToggleUserBtn");
-  
-    let userId = null;
-  
-    // 初始化表格
-    const grid = new gridjs.Grid(options).render(document.getElementById("dataTable"));
-  
-    // 表格点击
-    grid.on("cellClick", (...args) => {
-      const event = args[0];       // 官方：事件对象
-      const row    = args[3];      // 官方：行对象
-      userId = row.cells[0].data;  // 官方：取用户ID
+    `),
+          ]);
+        },
+        total: (data) => data.totalElements,
+      };
 
-      if (event.target.classList.contains("toggle-user-btn")) {
-        const state = row.cells[2].data;
-        const username = row.cells[1].data;
+      const pagination = {
+        limit: 10,
+        server: {
+          url: (prev, page, limit) =>
+            addQueryParam(prev, `size=${limit}&page=${page}`),
+        },
+      };
 
-        const message = state === "启用"
-          ? `请确认要"停用"用户 ${username}`
-          : `请确认要"启用"用户 ${username}`;
+      const options = {
+        columns,
+        pagination,
+        server,
+        language: gridjs.l10n.cnCN,
+        sort: true,
+      };
 
-        toggleUserToastMessage.innerText = message;
-        toggleUserToast.show();
-        return;
-      }
-
-      if (event.target.classList.contains("reset-pwd-btn")) {
-        resetPwdModal.show();
-        return;
-      }
-    });
-  
-    // 重置密码
-    resetPwdForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (!resetPwdForm.checkValidity()) {
-        resetPwdForm.classList.add("was-validated");
-        return;
-      }
-  
-      const pwd = resetPwdForm.password.value.trim();
-      const pwd2 = resetPwdForm.passwordRepeat.value.trim();
-  
-      if (pwd !== pwd2) {
-        createAlert(resetPwdAlert, "两次密码不一致", "danger");
-        return;
-      }
-  
-      try {
-        const res = await fetch(`/api/rest/user/${userId}/update-password`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password: pwd, passwordRepeat: pwd2 })
-        });
-  
-        if (res.ok) {
-          resetPwdModal.hide();
-          successToastMessage.innerText = "重置密码成功";
-          successToast.show();
-          grid.forceRender();
-        } else {
-          const err = await res.json();
-          createAlert(resetPwdAlert, err.message || "失败", "danger");
-        }
-      } catch (e) {
-        createAlert(resetPwdAlert, "网络异常", "danger");
-      }
-    });
-  
-    // 切换状态
-    confirmToggleUserBtn.addEventListener("click", async () => {
-      try {
-        const res = await fetch(`/api/rest/user/${userId}/toggle`, { method: "PATCH" });
-        if (res.ok) {
-          toggleUserToast.hide();
-          successToastMessage.innerText = "状态切换成功";
-          successToast.show();
-          grid.forceRender();
-        } else {
-          const err = await res.json();
-          createAlert(toggleUserAlert, err.message || "失败", "danger");
-        }
-      } catch (e) {
-        createAlert(toggleUserAlert, "网络异常", "danger");
-      }
-    });
-  
-    // 搜索
-    document.getElementById("searchForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const params = new URLSearchParams(formData);
-      const newUrl = addQueryParam(url, params.toString());
-  
-      try {
-        const test = await fetch(newUrl);
-        if (test.status === 403) {
-          showPermissionModal();
+      // ========== 页面加载 ==========
+      window.onload = function () {
+        if (typeof bootstrap === "undefined") {
+          setTimeout(() => {
+            window.onload();
+          }, 100);
           return;
         }
-        options.server.url = newUrl;
-        grid.updateConfig(options).forceRender();
-      } catch (err) {
-        console.error(err);
-      }
-    });
-  
-    // 清空弹窗
-    resetPwdModalEl.addEventListener("hidden.bs.modal", () => {
-      resetPwdForm.reset();
-      resetPwdForm.classList.remove("was-validated");
-      resetPwdAlert.innerHTML = "";
-    });
-  };
-  
-  // 权限弹窗
-  function showPermissionModal() {
-    let m = document.getElementById("permissionModal");
-    if (!m) {
-      m = document.createElement("div");
-      m.id = "permissionModal";
-      m.className = "modal fade";
-      m.innerHTML = `
+
+        // 初始化组件
+        const successToastEl = document.getElementById("successToastEl");
+        const successToast = new bootstrap.Toast(successToastEl, {
+          delay: 2000,
+        });
+        const successToastMessage = document.getElementById(
+          "successToastMessage",
+        );
+
+        const resetPwdModalEl = document.getElementById("resetPwdModalEl");
+        const resetPwdModal = new bootstrap.Modal(resetPwdModalEl, {
+          keyboard: false,
+        });
+        const resetPwdForm = document.getElementById("resetPwdForm");
+        const resetPwdAlert = document.getElementById("resetPwdAlert");
+
+        const toggleUserToastEl = document.getElementById("toggleUserToastEl");
+        const toggleUserToast = new bootstrap.Toast(toggleUserToastEl, {
+          autohide: false,
+        });
+        const toggleUserToastMessage = document.getElementById(
+          "toggleUserToastMessage",
+        );
+        const toggleUserAlert = document.getElementById("toggleUserAlert");
+        const confirmToggleUserBtn = document.getElementById(
+          "confirmToggleUserBtn",
+        );
+        const createUserBtn = document.getElementById("createUserBtn");
+        const editUserModalEl = document.getElementById("editUserModalEl");
+        const editUserModal = new bootstrap.Modal(editUserModalEl, {
+          keyboard: false,
+        });
+        const editUserForm = document.getElementById("editUserForm");
+        const editUserAlert = document.getElementById("editUserAlert");
+        const passwordEdit = document.getElementById("passwordEdit");
+        editUserModalEl.addEventListener("hidden.bs.modal", (event) => {
+          editUserForm.reset();
+          editUserAlert.classList.remove("was-validated");
+          editUserAlert.innerHTML = "";
+          const passwordClone =
+            editUserForm.querySelector("#passwordEditClone");
+          if (passwordClone) {
+            passwordClone.remove();
+          }
+        });
+
+        let userId = null;
+
+        // 初始化表格
+        const grid = new gridjs.Grid(options).render(
+          document.getElementById("dataTable"),
+        );
+
+        // 表格点击
+        grid.on("cellClick", (...args) => {
+          const event = args[0];
+          const row = args[3];
+          userId = row.cells[0].data;
+
+          if (event.target.classList.contains("edit-btn")) {
+            // 从表格行数据直接获取用户信息
+            const userData = {
+              id: row.cells[0].data,
+              username: row.cells[1].data,
+              name: row.cells[3].data,
+              phone: row.cells[4].data,
+              email: row.cells[5].data,
+            };
+
+            document.getElementById("usernameInput").value = userData.username;
+            document.getElementById("nameInput").value = userData.name;
+            document.getElementById("phoneInput").value = userData.phone;
+            document.getElementById("emailInput").value = userData.email;
+            // 部门和角色需要额外处理
+            editUserModal.show();
+            return;
+          }
+
+          if (event.target.classList.contains("toggle-user-btn")) {
+            const action =
+              event.target.innerText || event.target.textContent || "";
+            const username = row.cells[1].data;
+
+            const message = `请确认要"${action}"用户 ${username}`;
+
+            toggleUserToastMessage.innerText = message;
+            toggleUserToast.show();
+            return;
+          }
+
+          if (event.target.classList.contains("reset-pwd-btn")) {
+            resetPwdModal.show();
+            return;
+          }
+        });
+
+        // 添加用户按钮点击事件
+        createUserBtn.addEventListener("click", (e) => {
+          const passwordClone = passwordEdit.cloneNode(true);
+          passwordClone.id = "passwordEditClone";
+          passwordClone.classList.remove("d-none");
+          editUserForm.querySelectorAll("div.row.mb-3")[2].after(passwordClone);
+          userId = null;
+          editUserModal.show();
+        });
+
+        // 重置密码
+        resetPwdForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!resetPwdForm.checkValidity()) {
+            resetPwdForm.classList.add("was-validated");
+            return;
+          }
+
+          const pwd = resetPwdForm.password.value.trim();
+          const pwd2 = resetPwdForm.passwordRepeat.value.trim();
+
+          if (pwd !== pwd2) {
+            createAlert(resetPwdAlert, "两次密码不一致", "danger");
+            return;
+          }
+
+          try {
+            const res = await fetch(
+              `/api/rest/user/${userId}/update-password`,
+              {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password: pwd, passwordRepeat: pwd2 }),
+              },
+            );
+
+            if (res.ok) {
+              resetPwdModal.hide();
+              successToastMessage.innerText = "重置密码成功";
+              successToast.show();
+              grid.forceRender();
+            } else {
+              const err = await res.json();
+              createAlert(resetPwdAlert, err.message || "失败", "danger");
+            }
+          } catch (e) {
+            createAlert(resetPwdAlert, "网络异常", "danger");
+          }
+        });
+
+        // 切换状态
+        confirmToggleUserBtn.addEventListener("click", async () => {
+          try {
+            const res = await fetch(`/api/rest/user/${userId}/toggle`, {
+              method: "PATCH",
+            });
+            if (res.ok) {
+              toggleUserToast.hide();
+              successToastMessage.innerText = "状态切换成功";
+              successToast.show();
+              grid.forceRender();
+            } else {
+              const err = await res.json();
+              createAlert(toggleUserAlert, err.message || "失败", "danger");
+            }
+          } catch (e) {
+            createAlert(toggleUserAlert, "网络异常", "danger");
+          }
+        });
+
+        // 搜索
+        document
+          .getElementById("searchForm")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const params = new URLSearchParams(formData);
+            const newUrl = addQueryParam(url, params.toString());
+
+            try {
+              const test = await fetch(newUrl);
+              if (test.status === 403) {
+                showPermissionModal();
+                return;
+              }
+              options.server.url = newUrl;
+              grid.updateConfig(options).forceRender();
+            } catch (err) {
+              console.error(err);
+            }
+          });
+
+        // 清空弹窗
+        resetPwdModalEl.addEventListener("hidden.bs.modal", () => {
+          resetPwdForm.reset();
+          resetPwdForm.classList.remove("was-validated");
+          resetPwdAlert.innerHTML = "";
+        });
+
+        // 编辑用户表单提交
+        editUserForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (editUserForm.checkValidity()) {
+            const formData = new FormData(editUserForm);
+            const jsonStr = JSON.stringify(Object.fromEntries(formData));
+            const editUrl = userId ? `${url}/${userId}` : url;
+            const editMethod = userId ? "PATCH" : "POST";
+            fetch(editUrl, {
+              method: editMethod,
+              headers: { "Content-Type": "application/json" },
+              body: jsonStr,
+            }).then((res) => {
+              if (res.ok) {
+                editUserModal.hide();
+                successToastMessage.innerText = userId
+                  ? "更新用户信息"
+                  : "创建用户成功";
+                successToast.show();
+                grid.updateConfig(options).forceRender();
+              } else {
+                res.json().then((err) => {
+                  createAlert(editUserAlert, err.message || "失败", "danger");
+                });
+              }
+            });
+          } else {
+            editUserForm.classList.add("was-validated");
+          }
+          const passwordClone =
+            editUserForm.querySelector("#passwordEditClone");
+          if (passwordClone) {
+            passwordClone.remove();
+          }
+        });
+
+        // 下拉选择部门
+        fetch("/api/rest/dept/all")
+          .then((res) => res.json())
+          .then((data) => {
+            const deptSelect = document.getElementById("departmentInput");
+            data.forEach((item) => {
+              const option = document.createElement("option");
+              option.value = item.id;
+              option.innerText = item.name;
+              deptSelect.appendChild(option);
+            });
+          });
+
+        // 下拉选择角色
+        fetch("/api/rest/role/all")
+          .then((res) => res.json())
+          .then((data) => {
+            const roleSelect = document.getElementById("roleSelect");
+            data.forEach((item) => {
+              const option = document.createElement("option");
+              option.value = item.id;
+              option.innerText = item.name;
+              roleSelect.appendChild(option);
+            });
+          });
+      };
+
+      // 权限弹窗
+      function showPermissionModal() {
+        let m = document.getElementById("permissionModal");
+        if (!m) {
+          m = document.createElement("div");
+          m.id = "permissionModal";
+          m.className = "modal fade";
+          m.innerHTML = `
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -396,10 +807,10 @@
           </div>
         </div>
       `;
-      document.body.appendChild(m);
-    }
-    new bootstrap.Modal(m).show();
-  }
-  </script>
-</body>
+          document.body.appendChild(m);
+        }
+        new bootstrap.Modal(m).show();
+      }
+    </script>
+  </body>
 </html>
