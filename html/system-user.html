@@ -222,7 +222,7 @@
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
-                arialabel="Close"
+                aria-label="Close"
               ></button>
             </div>
             <div class="modal-body">
@@ -629,6 +629,10 @@
           const passwordClone = passwordEdit.cloneNode(true);
           passwordClone.id = "passwordEditClone";
           passwordClone.classList.remove("d-none");
+          const passwordInput = passwordClone.querySelector("#passwordInput");
+          if (passwordInput) {
+            passwordInput.id = "passwordInputClone";
+          }
           editUserForm.querySelectorAll("div.row.mb-3")[2].after(passwordClone);
           userId = null;
           editUserModal.show();
